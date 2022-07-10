@@ -50,6 +50,6 @@ app.use(errors());
 
 app.use(error);
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 app.listen(PORT);
