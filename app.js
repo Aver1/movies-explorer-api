@@ -15,7 +15,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+const {
+  NODE_ENV,
+  MONGO_URL,
+  DEFAULT_URL = 'mongodb://localhost:27017/bitfilmsdb',
+} = process.env;
+
+mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : DEFAULT_URL, {
+  useNewUrlParser: true,
+});
 
 app.use(cors());
 

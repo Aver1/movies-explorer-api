@@ -41,6 +41,9 @@ module.exports.updateUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         return next(new ValidarionErrror('name are not correct'));
       }
+      if (err.code === 11000) {
+        return next(new AlreadyExistError('Такой email уже занят'));
+      }
       return next(err);
     });
 };
